@@ -16,22 +16,17 @@ export default function Home() {
 // </div>
 
 //     </main>
+ 
+ <main className='bg-slate-50'>
 
 <div class="flex">
-  <div class="h-screen top-0 sticky p-4 w-1/3 overflow-y-scroll justify-center bg-slate-50 z-10">
+  <div class="h-screen top-0 sticky p-4 w-1/3 overflow-y-auto justify-center bg-white z-10 scrollbar-hide mx-1">
     {/* <!-- Note: add overflow-y-scroll if sidebar content is longer than page --> */}
     <div className='top-0 sticky bg-white shadow-xl py-2 rounded-lg'>
    <Selectbtn/>
-
-    </div>
   </div>
-  
-  <div class="flex-grow p-4  bg-slate-50">
 
-  <div className='top-0 sticky  bg-white shadow-xl py-2 rounded-lg'>
-    <Search/>
-</div>
-    Body <br/><br/><br/><br/>
+  Body <br/><br/><br/><br/>
     That <br/><br/><br/><br/>
     Scrolls <br/><br/><br/><br/><br/><br/><br/>
     Scrolls <br/><br/><br/><br/><br/><br/><br/>
@@ -42,8 +37,28 @@ export default function Home() {
     Scrolls <br/><br/><br/><br/><br/><br/><br/>
     Scrolls <br/><br/><br/><br/><br/><br/><br/>
   </div>
+  
+  <div class="flex-grow h-screen overflow-y-scroll p-4  bg-white scrollbar-hide mx-1">
+
+  <div className='top-0 sticky  bg-white shadow-xl py-2 rounded-lg'>
+    <Search/>
+</div>
+Body <br/><br/><br/><br/>
+    That <br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>Scrolls <br/><br/><br/><br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>Scrolls <br/><br/><br/><br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>
+    Scrolls <br/><br/><br/><br/><br/><br/><br/>
+  </div>
+
+
 </div>
 
+ </main>
 
   )
 }
