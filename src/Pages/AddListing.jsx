@@ -26,6 +26,7 @@ export default function AddListing() {
         
         const [selectedDuration, setSelectedDuration] = useState("1-3");
         const [selectedStipend , setSelectedStipend] =  useState("Unpaid");
+        const [selectedMode , setSelectedMode] =  useState("OnSite");
         // const textareaRef = userRef(null);
         // const blogContent = true ;
 
@@ -73,6 +74,7 @@ export default function AddListing() {
                     Name: auth.currentUser.displayName, 
                     duration: selectedDuration,
                     stipend : selectedStipend,
+                    mode : selectedMode,
                 }
 
                 const docRef = await addDoc(collection(db , "listings") , formDataCopy);
@@ -150,6 +152,19 @@ onChange={(e)=>setSelectedStipend(e.target.value)} value={selectedStipend}  clas
 <option  value="30-50K">30-50K</option>
 <option  value="50-70K">50-70K</option>
 <option  value="70K+">70K+</option>
+{/* <option  value="Entertainment">Entertainment</option>
+<option  value="Startups">Startups</option>
+<option  value="Other">Other</option> */}
+</select>
+
+<label className="label">
+<span className="label-text">Mode of Internship</span>
+</label>
+<select 
+onChange={(e)=>setSelectedMode(e.target.value)} value={selectedMode}  className="select select-bordered focus:outline-0 hover:shadow-lg">
+<option   value="OnSite">OnSite</option>
+<option  value="Hybrid">Hybrid</option>
+<option  value="Remote">Remote</option>
 {/* <option  value="Entertainment">Entertainment</option>
 <option  value="Startups">Startups</option>
 <option  value="Other">Other</option> */}
