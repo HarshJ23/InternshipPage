@@ -232,7 +232,7 @@ try {
 
 <div className='flex flex-col'>
   <label className="label">
-  <span className="label-text">Duration</span>
+  <span className="label-text">Duration(in Months)</span>
   </label>
   <select
   value={selectedDuration}
