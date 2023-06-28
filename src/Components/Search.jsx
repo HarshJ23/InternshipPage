@@ -1,8 +1,10 @@
 import React from 'react'
 
 export default function Search() {
-  return (
+return (
     <div className='mx-2'>
+      <form action=""   >
+
       <div className="form-control ">
   <div className="input-group">
     <input type="text" placeholder="Search…" className="input input-bordered" />
@@ -11,6 +13,7 @@ export default function Search() {
     </button>
   </div>
 </div>
+</form>
     </div>
   )
 }

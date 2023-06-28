@@ -13,6 +13,11 @@ export default function Home() {
 
   const [listing , setListings] = useState(null);
   const [main , setMain] = useState(null);
+   const [searchTerm, setSearchTerm] = useState('');
+   const [location, setLocation] = useState('');
+const [industry, setIndustry] = useState('');
+  // const [search, setSearch] = useState([]);
+
 
 
   useEffect(()=>{
@@ -32,6 +37,9 @@ async function fetchListing(){
     
       });
       setListings(listing);
+      // setSearchResults(listing);
+    
+      
   // console.log(listing);
     }
   
@@ -61,22 +69,36 @@ try {
       }
   };
 
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch('API_URL');
+  //     const data = await response.json();
+  //     // setData(data);
+  //     setFilteredData(data);
+  //   } catch (error) {
+  //     console.log('Error fetching data:', error);
+  //   }
+  // };
+
+
+
+  const handleSearch = (event,field) => {
+    const value = event.target.value;
+    if (field === 'title') {
+      setSearchTerm(value);
+    } else if (field === 'location') {
+      setLocation(value);
+    } else if (field === 'industry') {
+      setIndustry(value);
+    }
+  };
 
 
   return (
-//     <main className='grid grid-cols-2 gap-4 mx-2'>
-
-// <aside className='my-3  border-red-400 border-2'>
-//     <Selectbtn/>
-// </aside>
-
-// <div className='border-2 border-red-400 '>
-// <Search />
-
-// </div>
-
-//     </main>
 <main className='bg-slate-50'>
 
 <div class="flex">
@@ -86,27 +108,52 @@ try {
    <Selectbtn/>
   </div>
 
-{listing && listing.length>0 && (
+  {listing &&
+  listing
+    .filter((item) =>
+      item.data.title.toLowerCase().includes(searchTerm.toLowerCase() ?? '') &&
+      item.data.location.toLowerCase().includes(location.toLowerCase() ?? '') &&
+      item.data.domain.toLowerCase().includes(industry.toLowerCase() ?? '')
+    )
+    .map((list) => (
+      <Item
+        key={list.id}
+        id={list.id}
+        listing={list.data}
+        onClick={() => onClick(list.id)}
+      />
+    ))}
 
-<ul>
-  {listing.map((list) => (
-    <Item
-      key={list.id}
-      id={list.id}
-      listing={list.data}
-      onClick={()=>onClick(list.id)}
-    />
-  ))}
-</ul>
-)}
-  
 
   </div>
   
   <div class="flex-grow h-screen overflow-y-scroll p-4 bg-slate-100 scrollbar-hide mx-1">
 
   <div className='top-0 sticky  bg-white shadow-xl py-2 rounded-lg z-50'>
-    <Search/>
+
+  <div className='mx-2 flex flex-row justify-between'>
+      <div className="form-control ">
+  <div className="input-group">
+    <input type="text" placeholder="Search by Job title" className="input input-bordered"  value={searchTerm}
+    onChange={(event) => handleSearch(event, 'title')} />
+  </div>
+</div>
+
+<div className="form-control ">
+  <div className="input-group">
+    <input type="text" placeholder="Search by Location" className="input input-bordered"  value={location}
+  onChange={(event) => handleSearch(event, 'location')}/>
+  </div>
+</div>
+
+<div className="form-control ">
+  <div className="input-group">
+    <input type="text" placeholder="Search by Industry" className="input input-bordered"  value={industry}
+   onChange={(event) => handleSearch(event, 'industry')}/>
+  </div>
+</div>
+
+</div>
 </div>
 
 {/* Body <br/><br/><br/><br/>
@@ -120,7 +167,7 @@ try {
     Scrolls <br/><br/><br/><br/><br/><br/><br/>
     Scrolls <br/><br/><br/><br/><br/><br/><br/> */}
     {main && (
-      <Main name={main.name} title={main.title} duration={main.duration} domain={main.domain} stipend={main.stipend} mode={main.mode} location={main.location}/>
+      <Main description={main.description} skills={main.skills} name={main.name} title={main.title} duration={main.duration} domain={main.domain} stipend={main.stipend} mode={main.mode} location={main.location}/>
 
     )}
   </div>

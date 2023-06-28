@@ -32,7 +32,7 @@ export default function Main(props) {
       className="min-h-0 min-w-0 relative w-8 shrink-0 mr-px my-px"
     />
     <div className="whitespace-nowrap text-sm font-medium leading-[14px] text-black justify-start mr-6 relative">
-      {props.duration} Months
+     {props.duration} Months
       <div className="text-sm  font-semibold leading-[14px] text-black contents">
         <br />
       </div>
@@ -50,7 +50,7 @@ export default function Main(props) {
       </div>
       <div className="text-sm  font-light leading-[14px] text-black contents">Stipend</div>
     </div>
-    
+
     <img
       src="https://file.rendit.io/n/2ozksuyzf1ggJk7sgL2T.svg"
       className="min-h-0 min-w-0 relative w-8 shrink-0"
@@ -62,9 +62,19 @@ export default function Main(props) {
       </div>
       <div className="text-sm  font-light leading-[14px] text-black contents">Location</div>
     </div>
-  </div>
-  <div className="border-solid border-[#d0d5dd] relative w-[593px] h-px shrink-0 mb-0 ml-12 border-t border-b-0 border-x-0" />
-  <div className="flex flex-row justify-start gap-3 relative w-5/6 items-center mb-12 ml-8">
+
+    <img
+      src="https://file.rendit.io/n/2ozksuyzf1ggJk7sgL2T.svg"
+      className="min-h-0 min-w-0 relative w-8 shrink-0"
+    />
+    <div className="text-sm  font-medium leading-[14px] text-black justify-start relative">
+      {props.mode}
+      <div className="text-sm font-['Poppins'] font-semibold leading-[14px] text-black contents">
+        <br />
+      </div>
+      <div className="text-sm  font-light leading-[14px] text-black contents">Mode</div>
+    </div>
+
     <img
       src="https://file.rendit.io/n/i6Cr0uXIb8VPaKSFS9RO.svg"
       className="min-h-0 min-w-0 relative w-8 shrink-0 mr-px my-px"
@@ -76,13 +86,30 @@ export default function Main(props) {
       </div>
       <div className="text-sm  font-light leading-[14px] text-black contents">Posted</div>
     </div>
+
+  </div>
+
+
+  <div className="border-solid border-[#d0d5dd] relative w-[593px] h-px shrink-0 mb-0 ml-12 border-t border-b-0 border-x-0" />
+  <div className="flex flex-row justify-start gap-3 relative w-5/6 items-center mb-12 ml-8">
+    {/* <img
+      src="https://file.rendit.io/n/i6Cr0uXIb8VPaKSFS9RO.svg"
+      className="min-h-0 min-w-0 relative w-8 shrink-0 mr-px my-px"
+    />
+    <div className="whitespace-nowrap text-sm  font-medium leading-[14px] text-black justify-start mr-3 relative">
+      9 Days Ago
+      <div className="text-sm  font-semibold leading-[14px] text-black contents">
+        <br />
+      </div>
+      <div className="text-sm  font-light leading-[14px] text-black contents">Posted</div>
+    </div> */}
     
   </div>
 
   <div className="flex flex-row justify-start gap-4 relative items-center mb-2 ml-8">
     <div className="bg-[#f2f4f7] flex flex-col justify-start mr-px relative w-32 shrink-0 items-center px-5 py-1 rounded-[20px]">
       <div className="text-sm  font-medium text-black relative">
-        JavaScript
+       {props.skills}
       </div>
     </div>
 
@@ -113,14 +140,14 @@ export default function Main(props) {
   </div>
 
 
-  <div className="relative flex flex-col justify-start w-5/6 items-end mb-24 ml-8 pt-[108px] pb-56 px-64">
-    <div className="whitespace-nowrap text-sm  font-bold text-black absolute top-0 left-0 justify-start h-[391px] w-[726px]">
-      <p>About Us</p>
+  <div className="relative flex flex-col justify-start w-2/3 items-end mb-24 ml-8 pt-[108px] pb-56 px-64">
+    <div className="whitespace-wrap   font-bold text-black absolute top-0 left-0 justify-start h-[391px] w-[726px]">
+      <p className='text-lg'>Description</p>
 
-      <div className="text-sm contents">
-        We are a mobile and web development company. We're a professional,
-        individualistic one-stop
-      </div>
+      <p className='text-clip font-semibold'>
+          {props.description}
+        </p>
+      
      
     </div>
     </div>
