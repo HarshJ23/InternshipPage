@@ -6,7 +6,7 @@ import {BsCalendarDayFill} from 'react-icons/bs';
 
 export default function Item({id , listing , onClick}) {
   return (
-    <div onClick={() => onClick(id)}>
+    <div onClick={() => onClick(id)} className='hover:scale-95 duration-200 ease-in-out  '>
       <div className="card w-96 bg-white  text-black my-2 z-5 hover:shadow-purple-500 shadow-md active:shadow-purple-500 hover:cursor-pointer ">
   <div className="card-body">
 

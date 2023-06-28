@@ -147,9 +147,7 @@ export default function Main(props) {
       <p className='text-clip font-semibold'>
           {props.description}
         </p>
-      
-     
-    </div>
+      </div>
     </div>
   </div>
 

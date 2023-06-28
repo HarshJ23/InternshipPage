@@ -7,6 +7,7 @@ import { useEffect , useState}  from 'react';
 import { doc,   orderBy ,  getDoc} from "firebase/firestore";
 import {db} from '../firebase'
 import { collection, query, where, getDocs ,   limit} from "firebase/firestore";
+import {FaFilter} from 'react-icons/fa'
 
 
 export default function Home() {
@@ -16,6 +17,8 @@ export default function Home() {
    const [searchTerm, setSearchTerm] = useState('');
    const [location, setLocation] = useState('');
 const [industry, setIndustry] = useState('');
+const [selectedStipendRange, setSelectedStipendRange] = useState('');
+const [selectedModeOfWork  , setSelectedModeOfWork] = useState('');
   // const [search, setSearch] = useState([]);
 
 
@@ -98,6 +101,19 @@ try {
   };
 
 
+  // function for checking stipend range 
+  const stipendRangeCheck = (stipend, selectedStipendRange) => {
+    const [min, max] = selectedStipendRange.split('-');
+    const stipendValue = parseInt(stipend.replace(/,/g, '')); // remove commas from stipend value
+  
+    if (min === 'Unpaid') {
+      return stipendValue === 0;
+    }
+  
+    return stipendValue >= parseInt(min) && stipendValue <= parseInt(max);
+  };
+  
+
   return (
 <main className='bg-slate-50'>
 
@@ -110,11 +126,21 @@ try {
 
   {listing &&
   listing
-    .filter((item) =>
-      item.data.title.toLowerCase().includes(searchTerm.toLowerCase() ?? '') &&
-      item.data.location.toLowerCase().includes(location.toLowerCase() ?? '') &&
-      item.data.domain.toLowerCase().includes(industry.toLowerCase() ?? '')
-    )
+    .filter((item) => {
+      const title = item.data.title || '';
+      const itemLocation = item.data.location || '';
+      const itemIndustry = item.data.domain || '';
+      const stipend = item.data.stipend || '';
+      const modeOfWork = item.data.mode || '';
+    
+      return (
+        title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (location === '' || itemLocation.toLowerCase().includes(location.toLowerCase())) &&
+        (industry === '' || itemIndustry.toLowerCase().includes(industry.toLowerCase())) &&
+        (selectedStipendRange === '' || stipendRangeCheck(stipend, selectedStipendRange)) &&
+        (selectedModeOfWork === '' || modeOfWork === selectedModeOfWork)
+      );
+    })
     .map((list) => (
       <Item
         key={list.id}
@@ -123,6 +149,9 @@ try {
         onClick={() => onClick(list.id)}
       />
     ))}
+
+
+
 
 
   </div>
@@ -134,42 +163,84 @@ try {
   <div className='mx-2 flex flex-row justify-between'>
       <div className="form-control ">
   <div className="input-group">
-    <input type="text" placeholder="Search by Job title" className="input input-bordered"  value={searchTerm}
+    <input type="text" placeholder="Search by Job title" className="input input-bordered  hover:shadow-lg"  value={searchTerm}
     onChange={(event) => handleSearch(event, 'title')} />
   </div>
 </div>
 
 <div className="form-control ">
   <div className="input-group">
-    <input type="text" placeholder="Search by Location" className="input input-bordered"  value={location}
+    <input type="text" placeholder="Search by Location" className="input input-bordered  hover:shadow-lg"  value={location}
   onChange={(event) => handleSearch(event, 'location')}/>
   </div>
 </div>
 
 <div className="form-control ">
   <div className="input-group">
-    <input type="text" placeholder="Search by Industry" className="input input-bordered"  value={industry}
+    <input type="text" placeholder="Search by Industry" className="input input-bordered  hover:shadow-lg"  value={industry}
    onChange={(event) => handleSearch(event, 'industry')}/>
   </div>
 </div>
 
+
+<div>
+
+
+{/* Additional Filter */}
+<button className="btn hover:shadow-lg" onClick={()=>window.my_modal_3.showModal()}><FaFilter className='text-purple-600'/></button>
+<dialog id="my_modal_3" className="modal">
+  <form method="dialog" className="modal-box flex flex-row justify-around">
+
+    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+
+<div className="flex flex-col">
+
+<label className="label">
+<span className="label-text">Stipend( in ₹ )</span>
+</label>
+<select
+ value={selectedStipendRange}
+ onChange={(e) => setSelectedStipendRange(e.target.value)}
+ className="select select-bordered focus:outline-0 hover:shadow-lg">
+<option value="">All</option>
+<option   value="Unpaid">Unpaid</option>
+<option  value="0-10K">0-10K</option>
+<option  value="10-30K">10-30K</option>
+<option  value="30-50K">30-50K</option>
+<option  value="50-70K">50-70K</option>
+</select>
+</div>
+
+<div className='flex flex-col'>
+  <label className="label">
+  <span className="label-text">Mode of Work</span>
+  </label>
+  <select
+  value={selectedModeOfWork}
+  onChange={(e) => setSelectedModeOfWork(e.target.value)}
+  className="select select-bordered focus:outline-0 hover:shadow-lg">
+  <option value="">All</option>
+  <option value="OnSite">OnSite</option>
+  <option value="Hybrid">Hybrid</option>
+  <option value="Remote">Remote</option>
+  </select>
+</div>
+    
+</form>
+
+</dialog>
+
+
+
+</div>
+
+
 </div>
 </div>
 
-{/* Body <br/><br/><br/><br/>
-    That <br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/>Scrolls <br/><br/><br/><br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/>Scrolls <br/><br/><br/><br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/>
-    Scrolls <br/><br/><br/><br/><br/><br/><br/> */}
-    {main && (
+{main && (
       <Main description={main.description} skills={main.skills} name={main.name} title={main.title} duration={main.duration} domain={main.domain} stipend={main.stipend} mode={main.mode} location={main.location}/>
-
-    )}
+)}
   </div>
 
 
