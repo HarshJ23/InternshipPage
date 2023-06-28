@@ -16,7 +16,7 @@ export default function Item({id , listing , onClick}) {
 </div>
 
 <div>
-    <p className='font-semibold text-base'>{listing.skills}</p>
+    <p className='font-semibold text-base'>Skills :  {listing.skills}</p>
 </div>
 
     <div className="card-actions justify-end mt-2">

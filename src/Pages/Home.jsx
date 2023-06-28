@@ -19,6 +19,7 @@ export default function Home() {
 const [industry, setIndustry] = useState('');
 const [selectedStipendRange, setSelectedStipendRange] = useState('');
 const [selectedModeOfWork  , setSelectedModeOfWork] = useState('');
+const [selectedDuration , setDuration] = useState('');
   // const [search, setSearch] = useState([]);
 
 
@@ -132,13 +133,15 @@ try {
       const itemIndustry = item.data.domain || '';
       const stipend = item.data.stipend || '';
       const modeOfWork = item.data.mode || '';
+      const duration = item.data.duration || '';
     
       return (
         title.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (location === '' || itemLocation.toLowerCase().includes(location.toLowerCase())) &&
         (industry === '' || itemIndustry.toLowerCase().includes(industry.toLowerCase())) &&
         (selectedStipendRange === '' || stipendRangeCheck(stipend, selectedStipendRange)) &&
-        (selectedModeOfWork === '' || modeOfWork === selectedModeOfWork)
+        (selectedModeOfWork === '' || modeOfWork === selectedModeOfWork) && 
+        (selectedDuration === '' || duration === selectedDuration)
       );
     })
     .map((list) => (
@@ -223,6 +226,22 @@ try {
   <option value="OnSite">OnSite</option>
   <option value="Hybrid">Hybrid</option>
   <option value="Remote">Remote</option>
+  </select>
+</div>
+
+
+<div className='flex flex-col'>
+  <label className="label">
+  <span className="label-text">Duration</span>
+  </label>
+  <select
+  value={selectedDuration}
+  onChange={(e) => setDuration(e.target.value)}
+  className="select select-bordered focus:outline-0 hover:shadow-lg">
+  <option value="">All</option>
+  <option value="1-3">1-3</option>
+  <option value="3-6">3-6</option>
+  <option value="6+">6+</option>
   </select>
 </div>
     

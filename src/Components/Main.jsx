@@ -92,17 +92,7 @@ export default function Main(props) {
 
   <div className="border-solid border-[#d0d5dd] relative w-[593px] h-px shrink-0 mb-0 ml-12 border-t border-b-0 border-x-0" />
   <div className="flex flex-row justify-start gap-3 relative w-5/6 items-center mb-12 ml-8">
-    {/* <img
-      src="https://file.rendit.io/n/i6Cr0uXIb8VPaKSFS9RO.svg"
-      className="min-h-0 min-w-0 relative w-8 shrink-0 mr-px my-px"
-    />
-    <div className="whitespace-nowrap text-sm  font-medium leading-[14px] text-black justify-start mr-3 relative">
-      9 Days Ago
-      <div className="text-sm  font-semibold leading-[14px] text-black contents">
-        <br />
-      </div>
-      <div className="text-sm  font-light leading-[14px] text-black contents">Posted</div>
-    </div> */}
+
     
   </div>
 
