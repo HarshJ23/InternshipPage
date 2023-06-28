@@ -64,7 +64,7 @@ try {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setMain(data);
-          console.log(main.name , main.title);
+          console.log(main.timestamp?.toDate());
         } else {
           console.log("No such document!");
         }
